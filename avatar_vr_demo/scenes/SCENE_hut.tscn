@@ -6,12 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://c76ltxt3hfdu4" path="res://avatar_vr_demo/models/cc0_hut.gltf" id="5_d0has"]
 [ext_resource type="Shader" path="res://avatar_vr_demo/core/mirror.gdshader" id="5_sxbms"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbmmg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fu8j5"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_sxbms")
 
 [node name="GameMap" type="Node3D"]
+
+[node name="cc0_hut@PendantLight@OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+distance_fade_enabled = true
+omni_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_rwmmv")
@@ -26,15 +31,10 @@ directional_shadow_blend_splits = true
 
 [node name="Mirror" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("4_rka68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.4, -2.4)
-surface_material_override/0 = SubResource("ShaderMaterial_kbmmg")
+surface_material_override/0 = SubResource("ShaderMaterial_fu8j5")
 origin = NodePath("../PlayerController/PositionInterp/RotationInterp/XROrigin3D")
 
 [node name="cc0_hut" parent="." instance=ExtResource("5_d0has")]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="cc0_hut/PendantLight" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-distance_fade_enabled = true
-omni_shadow_mode = 0
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
